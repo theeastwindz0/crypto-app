@@ -5,6 +5,7 @@ import FocusedStatusBar from './components/FocusedStatusBar'
 import { COLORS } from '../constants/theme'
 import { NFTData } from '../constants/dummy'
 import HomeHeader from './components/HomeHeader'
+import NFTCard from './components/NFTCard'
 const Home = () => {
 
   return (
@@ -14,7 +15,7 @@ const Home = () => {
         <View className='z-0'>
           <FlatList 
           data={NFTData}
-          renderItem={({item})=><Text>{item.name}</Text>}
+          renderItem={({item})=><NFTCard data={item}/>}
           keyExtractor={(item)=>item.id}
           showsVerticalScrollIndicator={false}
           ListHeaderComponent={<HomeHeader/>}
@@ -22,8 +23,9 @@ const Home = () => {
         </View>
       </View>
       <View className='absolute top-0 right-0 bottom-0 left-0 z-[-1]'>
-        <View className='h-80 bg-blue-400'/>
-        <View className='flex-1 bg-white'/>
+        <View className='h-80 bg-pink-400'/>
+        <View className='flex-1 bg-gray'/>
+        
       </View>
     </SafeAreaView>
   )
