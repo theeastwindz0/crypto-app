@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, FlatList } from 'react-native'
+import { View, Text, SafeAreaView, FlatList, Image } from 'react-native'
 import React from 'react'
 import { useState } from 'react'
 import FocusedStatusBar from './components/FocusedStatusBar'
@@ -6,6 +6,7 @@ import { COLORS } from '../constants/theme'
 import { NFTData } from '../constants/dummy'
 import HomeHeader from './components/HomeHeader'
 import NFTCard from './components/NFTCard'
+import assets from '../constants/assets'
 const Home = () => {
 
   return (
@@ -23,7 +24,7 @@ const Home = () => {
         </View>
       </View>
       <View className='absolute top-0 right-0 bottom-0 left-0 z-[-1]'>
-        <View className='h-80 bg-pink-400'/>
+        <View className='h-80 bg-primary'/>
         <View className='flex-1 bg-gray'/>
         
       </View>

@@ -7,7 +7,6 @@ import { useNavigation } from '@react-navigation/native'
 
 const NFTCard = ({data}) => {
   const navigation=useNavigation();
-  console.log(data);
   return (
     <View  className='bg-white rounded-lg m-4'>
       <View className='w-[100%] h-[250px] '>

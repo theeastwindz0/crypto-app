@@ -6,8 +6,7 @@ const FocusedStatusBar = (props) => {
   const isFocused=useIsFocused();
 
 
-  return 
-  isFocused ? <StatusBar animated={true} {...props}/> : null;
+  return <StatusBar barStyle='light-content' animated={true} backgroundColor='white' {...props}/>
 }
 
 export default FocusedStatusBar

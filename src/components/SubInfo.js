@@ -12,6 +12,7 @@ const SubInfo = () => {
     <View className='flex flex-row'>
         {[assets.person02,assets.person03,assets.person04].map((imgUrl,index)=>
         <Image
+        key={index}
         source={imgUrl}
         resizeMode='contain'
         className={`w-12 h-12 rounded-full bg-white ${index===0 ? 'ml-0' : 'ml-[-12px]'}`}
