@@ -25,6 +25,8 @@ export default function App() {
   }
   }
   const Stack=createStackNavigator();
+
+  if(!loaded)return null;
   return (
     <NavigationContainer >
     <Stack.Navigator screenOptions={{headerShown:false}}
