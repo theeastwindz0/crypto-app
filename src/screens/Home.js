@@ -1,17 +1,17 @@
 import { View, Text, SafeAreaView, FlatList, Image } from 'react-native'
 import React from 'react'
 import { useState } from 'react'
-import FocusedStatusBar from './components/FocusedStatusBar'
-import { COLORS } from '../constants/theme'
-import { NFTData } from '../constants/dummy'
-import HomeHeader from './components/HomeHeader'
-import NFTCard from './components/NFTCard'
-import assets from '../constants/assets'
+import FocusedStatusBar from '../components/FocusedStatusBar'
+import { COLORS } from '../../constants/theme'
+import { NFTData } from '../../constants/dummy'
+import HomeHeader from '../components/HomeHeader'
+import NFTCard from '../components/NFTCard'
+import assets from '../../constants/assets'
 const Home = () => {
 
   return (
     <SafeAreaView className='flex-1'>
-      <FocusedStatusBar background={COLORS.primary} />
+      <FocusedStatusBar background={COLORS.primary} barStyle='light-content' />
       <View className='flex-1'>
         <View className='z-0'>
           <FlatList 

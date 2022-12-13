@@ -4,8 +4,8 @@ import { useFonts } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Details from './src/Details';
-import Home from './src/Home';
+import Details from './src/screens/Details';
+import Home from './src/screens/Home';
 
 export default function App() {
 
