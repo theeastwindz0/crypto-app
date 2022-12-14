@@ -1,13 +1,7 @@
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useFonts } from 'expo-font';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import Details from './src/screens/Details';
-import Home from './src/screens/Home';
-import Login from './src/screens/Login';
-import Signup from './src/screens/Signup';
+import { ALL_LINKS } from './src/constant';
 
 export default function App() {
 
@@ -29,15 +23,28 @@ export default function App() {
   const Stack=createStackNavigator();
 
   if(!loaded)return null;
+  const SCREENS=[
+    ALL_LINKS.Signup,
+    ALL_LINKS.Login,
+    ALL_LINKS.Home,
+    ALL_LINKS.Details
+  ];
+
+  const isLoggedIn=true;
   return (
     <NavigationContainer >
     <Stack.Navigator screenOptions={{headerShown:false}}
-    initialRouteName='Login'
+    initialRouteName='Signup'
     >
-      <Stack.Screen name='Signup' component={Signup}/>
-      <Stack.Screen name='Login' component={Login}/>
-      <Stack.Screen name='Home' component={Home} />
-      <Stack.Screen name='Details' component={Details} />
+      {SCREENS.map((item,i)=>
+      // item.loginRequire ?
+      // <Stack.Screen key={i} name={item.name} component={
+      //   item.component
+      // }/>
+      // :
+      <Stack.Screen key={i} name={item.name} component={item.component}/>
+
+      )}
     </Stack.Navigator>
   </NavigationContainer>
 

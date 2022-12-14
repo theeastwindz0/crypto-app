@@ -1,13 +1,13 @@
-import { View, Text, TextInput, Image, Button } from "react-native";
+import { View, Text, TextInput, Image, Button, Alert } from "react-native";
 import React from "react";
 import { Formik } from "formik";
 import InputField from "../components/InputField";
 import assets from "../../constants/assets";
 import * as yup from "yup";
 import { CustomButton, RectButton } from "../components/Button";
-import { useNavigation } from "@react-navigation/native";
 import { ScrollView } from "react-native-gesture-handler";
-const Signup = () => {
+import { getSignup } from "../services/userModuleService";
+const Signup = ({route,navigation}) => {
   const loginValidationSchema = yup.object().shape({
     username: yup
       .string()
@@ -19,13 +19,31 @@ const Signup = () => {
       .required("Password is required"),
     email: yup
       .string()
-      .email("Please enter valid email")
+      // .email("Please enter valid email")
       .required("Email is required"),
     name: yup.string()
     .required("Name is required"),
   });
 
-  const navigation = useNavigation();
+
+  const createUserHandler=async(values,resetForm)=>{
+        getSignup({
+        username:values.username,
+        name:values.name,
+        phoneNo:values.email,
+        password:values.password
+      })
+      .then(res=>{
+        console.log(res.data);
+        resetForm({values:''})
+        Alert.alert('User Created Successfully',
+        'User have been created successfully !',
+        'Login'
+        );
+        navigation.navigate('Login')
+      })
+      .catch(err=>console.log(err))
+  }
 
   return (
     <View className='flex-1 bg-slate-200'>
@@ -49,9 +67,10 @@ const Signup = () => {
                 name:'',
                 email:''
             }}
-            onSubmit={(values)=>console.log(values)}
+            onSubmit={(values,{resetForm})=>createUserHandler(values,resetForm)}
+            
             >
-            {({handleBlur,handleChange,handleSubmit,values,errors,touched})=>(
+            {({handleBlur,handleChange,handleSubmit,values,errors,touched,resetForm})=>(
             <>
             <InputField label='Name' name='name' placeholder='Enter Name' onChangeText={handleChange('name')} onBlur={handleBlur('name')} value={values.name} keyboardType="email-address" error={errors.name} touched={touched.name} />
             <InputField label='Email' name='email' placeholder='Enter Email' onChangeText={handleChange('email')} onBlur={handleBlur('email')} value={values.email} keyboardType="email-address" error={errors.email} touched={touched.email} />
