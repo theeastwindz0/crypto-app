@@ -70,7 +70,7 @@ const Details = ({route,navigation}) => {
   return (
     <View className='flex-1'>
       <FocusedStatusBar barStyle='dark-content' />
-      <View className='absolute bottom-5 w-[100%]  '>
+      <View className='absolute bottom-5 w-[100%] z-10  '>
       <View className='mx-20'>
       <RectButton title='Place a bid' className='bg-pink-500' />
       </View>

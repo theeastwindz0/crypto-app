@@ -6,6 +6,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Details from './src/screens/Details';
 import Home from './src/screens/Home';
+import Login from './src/screens/Login';
+import Signup from './src/screens/Signup';
 
 export default function App() {
 
@@ -30,8 +32,10 @@ export default function App() {
   return (
     <NavigationContainer >
     <Stack.Navigator screenOptions={{headerShown:false}}
-    initialRouteName='Home'
+    initialRouteName='Login'
     >
+      <Stack.Screen name='Signup' component={Signup}/>
+      <Stack.Screen name='Login' component={Login}/>
       <Stack.Screen name='Home' component={Home} />
       <Stack.Screen name='Details' component={Details} />
     </Stack.Navigator>
