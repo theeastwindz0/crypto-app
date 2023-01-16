@@ -4,7 +4,7 @@ import assets from '../../constants/assets'
 
 
 
-const SubInfo = () => {
+const SubInfo = ({data}) => {
   return (
     <View className='mt-[-32px] bottom-0 left-0 right-0'>
     <View className='w-[100%] flex flex-row justify-between   p-2'>
@@ -20,8 +20,8 @@ const SubInfo = () => {
         )}
     </View>
     <View className='bg-white shadow-md rounded-md p-2 px-4 flex justify-center items-center'>
-        <Text>Ending in</Text>
-        <Text className='font-bold text-base'>12H 30M</Text>
+        <Text>Valuation Rank</Text>
+        <Text className='font-bold text-base'>{data.market_cap_rank}</Text>
     </View>
 
     </View>

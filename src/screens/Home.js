@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView, FlatList, Image } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import FocusedStatusBar from '../components/FocusedStatusBar'
 import { COLORS } from '../../constants/theme'
@@ -7,7 +7,19 @@ import { NFTData } from '../../constants/dummy'
 import HomeHeader from '../components/HomeHeader'
 import NFTCard from '../components/NFTCard'
 import assets from '../../constants/assets'
+import { getCoins } from '../services/userModuleService'
 const Home = () => {
+  const [coinData,setCoinData]=useState([]);
+  useEffect(()=>{
+    getCoins()
+    .then((res)=>{
+      setCoinData(res.data);
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  },[])
+
 
   return (
     <SafeAreaView className='flex-1'>
@@ -15,7 +27,7 @@ const Home = () => {
       <View className='flex-1'>
         <View className='z-0'>
           <FlatList 
-          data={NFTData}
+          data={coinData}
           renderItem={({item})=><NFTCard data={item}/>}
           keyExtractor={(item)=>item.id}
           showsVerticalScrollIndicator={false}

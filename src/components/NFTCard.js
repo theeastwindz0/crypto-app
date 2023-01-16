@@ -6,24 +6,25 @@ import SubInfo from './SubInfo'
 import { useNavigation } from '@react-navigation/native'
 
 const NFTCard = ({data}) => {
+
   const navigation=useNavigation();
   return (
     <View  className='bg-white rounded-lg m-4'>
-      <View className='w-[100%] h-[250px] '>
+      <View className='w-[100%] h-[250px] flex items-center justify-center'>
         <Image
-         source={data.image}
-         resizeMode='cover'
-         className='w-[100%] h-[100%] rounded-lg '
+         source={{uri:data.image}}
+         resizeMode='contain'
+         className='w-[80%] h-[80%] rounded-lg '
          />
       </View>
       <View className='absolute top-2 right-2'>
       <CircleButton imgUrl={assets.heart}  />
       </View>
 
-      <SubInfo/>
+      <SubInfo data={data}/>
 
       <View className='p-2'>
-      <Text className='text-base font-bold'>{data.name}</Text>
+      <Text className='text-base font-bold '>{data.name}</Text>
       <Text className=''>{data.creator}</Text>
       </View>
 
@@ -34,9 +35,9 @@ const NFTCard = ({data}) => {
           className='w-5 h-5'
           resizeMode='contain'
           />
-          <Text className='font-bold'>{data.price}</Text>
+          <Text className='font-bold text-lg'>$ {data.current_price}</Text>
         </View>
-        <RectButton title='Place a bid' className='p-2' handlePress={()=>navigation.navigate('Details',{data})} />
+        <RectButton title='Details' className='p-2' handlePress={()=>navigation.navigate('Details',{data})} />
       </View>
 
     </View>

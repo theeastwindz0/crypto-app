@@ -6,6 +6,7 @@ import assets from '../../constants/assets'
 import * as yup from 'yup'
 import { CustomButton, RectButton } from '../components/Button'
 import { useNavigation } from '@react-navigation/native'
+import { getLogin } from '../services/userModuleService'
 const Login = () => {
 
     const loginValidationSchema=yup.object().shape({
@@ -21,6 +22,19 @@ const Login = () => {
     })
 
     const navigation=useNavigation();
+
+    const loginHandler=async(values,resetForm)=>{
+      getLogin({
+      username:values.username,
+      password:values.password
+    })
+    .then(res=>{
+      console.log(res.data);
+      resetForm({values:''});
+      navigation.navigate('Home')
+    })
+    .catch(err=>console.log(err.response.data))
+}
 
 
   return (
@@ -40,7 +54,7 @@ const Login = () => {
             <Formik 
             validationSchema={loginValidationSchema}
             initialValues={{username:'',password:''}}
-            onSubmit={(values)=>console.log(values)}
+            onSubmit={(values,{resetForm})=>loginHandler(values,resetForm)}
             >
             {({handleBlur,handleChange,handleSubmit,values,errors,touched})=>(
             <>

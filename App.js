@@ -34,7 +34,7 @@ export default function App() {
   return (
     <NavigationContainer >
     <Stack.Navigator screenOptions={{headerShown:false}}
-    initialRouteName='Signup'
+    initialRouteName='Home'
     >
       {SCREENS.map((item,i)=>
       // item.loginRequire ?
