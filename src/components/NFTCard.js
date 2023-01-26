@@ -25,7 +25,7 @@ const NFTCard = ({data}) => {
 
       <View className='p-2'>
       <Text className='text-base font-bold '>{data.name}</Text>
-      <Text className=''>{data.creator}</Text>
+      <Text className=''>{data.symbol}</Text>
       </View>
 
       <View className='flex flex-row justify-between p-4'>

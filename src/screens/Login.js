@@ -1,5 +1,5 @@
 import { View, Text, TextInput, Image, Button, ScrollView } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik } from 'formik'
 import InputField from '../components/InputField'
 import assets from '../../constants/assets'
@@ -7,7 +7,11 @@ import * as yup from 'yup'
 import { CustomButton, RectButton } from '../components/Button'
 import { useNavigation } from '@react-navigation/native'
 import { getLogin } from '../services/userModuleService'
+import {Ionicons} from '@expo/vector-icons'
+import { insertUserData } from '../util/database'
 const Login = () => {
+
+  const [error,setError]=useState('');
 
     const loginValidationSchema=yup.object().shape({
         username:yup
@@ -23,17 +27,33 @@ const Login = () => {
 
     const navigation=useNavigation();
 
+    const saveUserData=async(userData)=>{
+      console.log(userData)
+      await insertUserData({
+        userId:userData._id,
+        username:userData.username,
+        name:userData.name
+      });
+    }
+
     const loginHandler=async(values,resetForm)=>{
       getLogin({
       username:values.username,
       password:values.password
     })
     .then(res=>{
-      console.log(res.data);
-      resetForm({values:''});
+      const userData=res.data.user;
+      saveUserData(userData);
+      resetForm({
+        values:'',
+        errors:''
+      });
+      setError('');
       navigation.navigate('Home')
     })
-    .catch(err=>console.log(err.response.data))
+    .catch(err=>{
+      setError(err.response.data.message);
+      console.log( err.response.data.message);})
 }
 
 
@@ -54,13 +74,23 @@ const Login = () => {
             <Formik 
             validationSchema={loginValidationSchema}
             initialValues={{username:'',password:''}}
-            onSubmit={(values,{resetForm})=>loginHandler(values,resetForm)}
+            onSubmit={(values,{resetForm})=>{
+              loginHandler(values,resetForm)
+            }}
             >
             {({handleBlur,handleChange,handleSubmit,values,errors,touched})=>(
             <>
             <InputField label='Username' name='username' placeholder='Enter Username' onChangeText={handleChange('username')} onBlur={handleBlur('username')} value={values.username} keyboardType="email-address" error={errors.username} touched={touched.username} />
             <InputField label='Password' name='password' placeholder='Enter Password' onChangeText={handleChange('password')} onBlur={handleBlur('password')} value={values.password} keyboardType='default' error={errors.password} touched={touched.password} secureTextEntry={true} />
             {/* <Button onPress={handleSubmit} title="Submit" /> */}
+            
+            {error &&
+            <View className='flex flex-row mt-4 px-2'>
+              <Ionicons name='alert-circle-outline' size={28} color='red' />
+            <Text className='text-lg text-red-500 font-bold'>{error}</Text>
+            </View>
+            }
+
             <CustomButton onPress={handleSubmit} title='Submit' className='bg-pink-400'>Login</CustomButton>
             <View className='flex flex-row items-center '>
             <Text className='text-base'>Don't have an account ?</Text> 

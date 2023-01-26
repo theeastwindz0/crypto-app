@@ -2,6 +2,7 @@ import Details from './screens/Details';
 import Home from './screens/Home';
 import Login from './screens/Login';
 import Signup from './screens/Signup';
+import UserDetails from './screens/UserDetails';
 
 export const ALL_LINKS={
     Signup:{
@@ -24,6 +25,11 @@ export const ALL_LINKS={
         component:Details,
         loginRequire:true
     },
+    UserDetails:{
+        name:'UserDetails',
+        component:UserDetails,
+        loginRequire:true
+    },
 };
 
 
@@ -37,5 +43,5 @@ export const USER_URL={
 }
 
 export const DATA_URL={
-    getCoins:BASE_DATA_API+'v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false'
+    getCoins:BASE_DATA_API+'v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false'
 }

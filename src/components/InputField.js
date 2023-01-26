@@ -18,6 +18,7 @@ const InputField = ({
     <View className="">
       <Text className="p-2 pl-0 text-black text-base font-bold">{label}</Text>
       <TextInput
+      autoCapitalize="none"
         className="bg-gray-200 text-black p-4 rounded-md"
         name={name}
         placeholder={placeholder}

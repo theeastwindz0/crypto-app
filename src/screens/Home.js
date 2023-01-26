@@ -8,7 +8,13 @@ import HomeHeader from '../components/HomeHeader'
 import NFTCard from '../components/NFTCard'
 import assets from '../../constants/assets'
 import { getCoins } from '../services/userModuleService'
+import { fetchUserData } from '../util/database'
 const Home = () => {
+  const [user,setUser]=useState({
+    name:'',
+    username:'',
+    userId:'',
+  })
   const [coinData,setCoinData]=useState([]);
   useEffect(()=>{
     getCoins()
@@ -18,6 +24,22 @@ const Home = () => {
     .catch((err)=>{
       console.log(err)
     })
+
+    async function fetchUserData2(){
+      const data2=[];
+      const data=await fetchUserData();
+      for (const item of data.rows._array){
+        console.log(item.username)
+        data2.push({name:item.name,username:item.username,userId:item.userId});
+      }
+      setUser({
+        name:data2[0].name,
+        username:data2[0].username,
+        userId:data2[0].userId,
+      })
+      }
+
+      fetchUserData2();
   },[])
 
 
@@ -31,7 +53,7 @@ const Home = () => {
           renderItem={({item})=><NFTCard data={item}/>}
           keyExtractor={(item)=>item.id}
           showsVerticalScrollIndicator={false}
-          ListHeaderComponent={<HomeHeader/>}
+          ListHeaderComponent={<HomeHeader userData={user}/>}
           />
         </View>
       </View>

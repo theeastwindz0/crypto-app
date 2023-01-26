@@ -17,10 +17,10 @@ const Signup = ({route,navigation}) => {
       .string()
       .min(8, ({ min }) => `Password must be ${min} characters long`)
       .required("Password is required"),
-    email: yup
+    phoneNo: yup
       .string()
       // .email("Please enter valid email")
-      .required("Email is required"),
+      .required("Phone no is required"),
     name: yup.string()
     .required("Name is required"),
   });
@@ -30,7 +30,7 @@ const Signup = ({route,navigation}) => {
         getSignup({
         username:values.username,
         name:values.name,
-        phoneNo:values.email,
+        phoneNo:values.phoneNo,
         password:values.password
       })
       .then(res=>{
@@ -65,16 +65,16 @@ const Signup = ({route,navigation}) => {
                 username:'',
                 password:'',
                 name:'',
-                email:''
+                phoneNo:''
             }}
             onSubmit={(values,{resetForm})=>createUserHandler(values,resetForm)}
             
             >
             {({handleBlur,handleChange,handleSubmit,values,errors,touched,resetForm})=>(
             <>
-            <InputField label='Name' name='name' placeholder='Enter Name' onChangeText={handleChange('name')} onBlur={handleBlur('name')} value={values.name} keyboardType="email-address" error={errors.name} touched={touched.name} />
-            <InputField label='Email' name='email' placeholder='Enter Email' onChangeText={handleChange('email')} onBlur={handleBlur('email')} value={values.email} keyboardType="email-address" error={errors.email} touched={touched.email} />
-            <InputField label='Username' name='username' placeholder='Enter Username' onChangeText={handleChange('username')} onBlur={handleBlur('username')} value={values.username} keyboardType="email-address" error={errors.username} touched={touched.username} />
+            <InputField label='Name' name='name' placeholder='Enter Name' onChangeText={handleChange('name')} onBlur={handleBlur('name')} value={values.name} keyboardType="default" error={errors.name} touched={touched.name} />
+            <InputField label='Mobile No' name='phoneNo' placeholder='Enter Mobile No' onChangeText={handleChange('phoneNo')} onBlur={handleBlur('phoneNo')} value={values.phoneNo}  error={errors.phoneNo} touched={touched.phoneNo} />
+            <InputField label='Username' name='username' placeholder='Enter Username' onChangeText={handleChange('username')} onBlur={handleBlur('username')} value={values.username} keyboardType="default" error={errors.username} touched={touched.username} />
             <InputField label='Password' name='password' placeholder='Enter Password' onChangeText={handleChange('password')} onBlur={handleBlur('password')} value={values.password} keyboardType='default' error={errors.password} touched={touched.password} secureTextEntry={true} />
             {/* <Button onPress={handleSubmit} title="Submit" /> */}
             <CustomButton onPress={handleSubmit} title='Submit' className='bg-pink-400'>Signup</CustomButton>

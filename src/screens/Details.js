@@ -1,12 +1,18 @@
 import { View, Text, SafeAreaView, FlatList, Image } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import FocusedStatusBar from '../components/FocusedStatusBar';
 import { CircleButton, RectButton } from '../components/Button';
 import DetailsBid from '../components/DetailsBid';
 import assets from '../../constants/assets';
 import SubInfo from '../components/SubInfo';
 import InfoCard from '../components/InfoCard';
+import { fetchUserData } from '../util/database';
  const  DetailsHeader=(props)=>{
+
+  useEffect(() => {
+
+  }, [])
+  
   
   return(
     <View>
@@ -55,7 +61,17 @@ import InfoCard from '../components/InfoCard';
       </View>
       
       <View className='space-y-2 my-4'>
-        <InfoCard title='test' icon='add' value='20' iconClass='bg-green-500' outerClass='bg-blue-500' />
+        <InfoCard title='24H Low' icon='trending-down-outline' value={props.data.low_24h} iconClass='bg-green-500' outerClass='bg-blue-500' />
+        <InfoCard title='24H High' icon='trending-up-outline' value={props.data.high_24h} iconClass='bg-green-500' outerClass='bg-pink-500' />
+        <InfoCard title='Market Cap' icon='podium-outline' value={props.data.market_cap} iconClass='bg-green-500' outerClass='bg-yellow-500' />
+        <InfoCard title='Total Volume' icon='analytics-outline' value={props.data.total_volume} iconClass='bg-green-500' outerClass='bg-orange-500' />
+        <InfoCard title='24H Change' icon='pulse-outline' value={props.data.price_change_24h} iconClass='bg-green-500' outerClass='bg-slate-500' />
+        <InfoCard title='24H % Change' icon='pulse-outline' value={props.data.price_change_percentage_24h} iconClass='bg-green-500' outerClass='bg-purple-500' />
+        <InfoCard title='Circulating Supply' icon='layers-outline' value={props.data.circulating_supply} iconClass='bg-green-500' outerClass='bg-black' />
+        <InfoCard title='Total Supply' icon='pie-chart-outline' value={props.data.total_supply} iconClass='bg-green-500' outerClass='bg-teal-500' />
+        <InfoCard title='Max Supply' icon='pie-chart-outline' value={props.data.max_supply} iconClass='bg-green-500' outerClass='bg-lime-500' />
+        <InfoCard title='24H M Cap Change' icon='pulse-outline' value={props.data.market_cap_change_24h} iconClass='bg-green-500' outerClass='bg-red-500' />
+        <InfoCard title='24H M Cap % Change' icon='pulse-outline' value={props.data.market_cap_change_percentage_24h} iconClass='bg-green-500' outerClass='bg-indigo-500' />
 
       </View>
 
