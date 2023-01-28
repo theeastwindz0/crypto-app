@@ -7,35 +7,23 @@ import { NFTData } from '../../constants/dummy'
 import HomeHeader from '../components/HomeHeader'
 import NFTCard from '../components/NFTCard'
 import assets from '../../constants/assets'
-import { getCoins, getLiked } from '../services/userModuleService'
+import { fetchNews, getCoins, getLiked } from '../services/userModuleService'
 import { fetchUserData } from '../util/database'
-const Home = () => {
+import NewsHeader from '../components/NewsHeader'
+import NewsCard from '../components/NewsCard'
+const News = () => {
   const [user,setUser]=useState({
     name:'',
     username:'',
     userId:'',
   })
-  const [coinData,setCoinData]=useState([]);
-  const [liked,setLiked]=useState([]);
-  const [allCoinData,setAllCoinData]=useState([]);
+  const [newsData,setNewsData]=useState([]);
+  const [search,setSearch]=useState('btc');
   useEffect(()=>{
-    getLiked()
-    .then((res)=>{
-      setLiked(res.data);
-      console.log(res.data);
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
 
-    getCoins()
+    fetchNews(search)
     .then((res)=>{
-      let data=[];
-      res.data.map((item)=>{
-          data.push({...item,liked:false})
-      })
-      setCoinData(data);
-      setAllCoinData(data);
+      setNewsData(res.data.articles)
     })
     .catch((err)=>{
       console.log(err)
@@ -58,31 +46,30 @@ const Home = () => {
   },[])
 
   const searchHandler=(text)=>{
-    let data=[];
-    if(text===''){
-      data=allCoinData;
-    }
-    else{
-    data=allCoinData.filter((item)=>
-      item.name.toLowerCase().includes(text.toLowerCase()) ||
-      item.symbol.toLowerCase().includes(text.toLowerCase()) 
-    );
-    }
-    setCoinData(data);
+    setSearch(text);
+  }
+
+  const searchButtonHandler=()=>{
+    fetchNews(search)
+    .then(res=>{
+      setNewsData(res.data.articles);
+      setSearch('');
+    })
+    .catch(err=>console.log(err))
   }
 
   return (
     <SafeAreaView className='flex-1'>
       <FocusedStatusBar background={COLORS.primary} barStyle='light-content' />
-      <HomeHeader searchHandler={searchHandler} userData={user}/>
+      <NewsHeader search={search} searchButtonHandler={searchButtonHandler} searchHandler={searchHandler} userData={user}/>
       <View className='flex-1'>
         <View className='z-0'>
-          {coinData.length===0 ?
-          <Text className='text-white text-lg font-semibold text-center uppercase mt-4'>No Crypto Found !</Text>:
+          {newsData.length===0 ?
+          <Text className='text-white text-lg font-semibold text-center uppercase mt-4'>Loading News !</Text>:
           <FlatList 
-          data={coinData}
-          renderItem={({item})=><NFTCard data={item}/>}
-          keyExtractor={(item)=>item.id}
+          data={newsData}
+          renderItem={({item})=><NewsCard data={item}/>}
+          keyExtractor={(item)=>item.publishedAt}
           showsVerticalScrollIndicator={false}
           // ListHeaderComponent={}
           />
@@ -97,4 +84,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default News

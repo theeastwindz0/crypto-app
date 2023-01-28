@@ -1,11 +1,14 @@
 import { View, Text, Image } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { CircleButton, RectButton } from './Button'
 import assets from '../../constants/assets'
 import SubInfo from './SubInfo'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
+import {Ionicons} from '@expo/vector-icons'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const NFTCard = ({data}) => {
+  const [isLiked,setIsLiked]=useState(data.liked);
 
   const navigation=useNavigation();
   return (
@@ -18,7 +21,13 @@ const NFTCard = ({data}) => {
          />
       </View>
       <View className='absolute top-2 right-2'>
-      <CircleButton imgUrl={assets.heart}  />
+      <TouchableOpacity activeOpacity={0.6} onPress={()=>setIsLiked(!isLiked)} >
+      {/* <CircleButton imgUrl={assets.heart}  /> */}
+      {isLiked ?
+      <Ionicons name='heart-dislike-circle' size={48} color='red' />:
+      <Ionicons name='heart-circle-sharp' size={48} color='red' />
+      }
+      </TouchableOpacity>
       </View>
 
       <SubInfo data={data}/>

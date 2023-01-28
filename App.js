@@ -38,14 +38,15 @@ export default function App() {
     ALL_LINKS.Login,
     ALL_LINKS.Home,
     ALL_LINKS.Details,
-    ALL_LINKS.UserDetails
+    ALL_LINKS.UserDetails,
+    ALL_LINKS.News
   ];
 
   const isLoggedIn=true;
   return (
     <NavigationContainer >
     <Stack.Navigator screenOptions={{headerShown:false}}
-    initialRouteName='Signup'
+    initialRouteName='Login'
     >
       {SCREENS.map((item,i)=>
       // item.loginRequire ?

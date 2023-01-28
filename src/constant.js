@@ -3,6 +3,7 @@ import Home from './screens/Home';
 import Login from './screens/Login';
 import Signup from './screens/Signup';
 import UserDetails from './screens/UserDetails';
+import News from './screens/News';
 
 export const ALL_LINKS={
     Signup:{
@@ -30,6 +31,11 @@ export const ALL_LINKS={
         component:UserDetails,
         loginRequire:true
     },
+    News:{
+        name:'News',
+        component:News,
+        loginRequire:true
+    },
 };
 
 
@@ -40,6 +46,8 @@ const BASE_DATA_API='https://api.coingecko.com/api/';
 export const USER_URL={
     signup:BASE_USER+'signup',
     login:BASE_USER+'login',
+    fetchLiked:API_ACCOUNT_DOMAIN+'/liked/getAllLiked',
+    addLiked:API_ACCOUNT_DOMAIN+'liked/addToLikedList'
 }
 
 export const DATA_URL={

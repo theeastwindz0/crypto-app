@@ -15,7 +15,7 @@ export const CircleButton = ({className,imgUrl,handlePress}) => {
 
 export const RectButton = ({className ,handlePress,title}) => {
     return (
-      <TouchableOpacity onPress={handlePress} activeOpacity={0.8} className={`px-4 py-3 bg-blue-600 rounded-full flex justify-center items-center  ${className} `}>
+      <TouchableOpacity onPress={handlePress} activeOpacity={0.8} className={`px-4 py-3 bg-blue-600 rounded-full flex justify-center items-center my-2  ${className} `}>
         <Text className='text-white font-bold'>{title}</Text>
       </TouchableOpacity>
     )
