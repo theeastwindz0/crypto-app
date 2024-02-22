@@ -46,14 +46,14 @@ export default function App() {
   return (
     <NavigationContainer >
     <Stack.Navigator screenOptions={{headerShown:false}}
-    initialRouteName='Login'
+    initialRouteName='Home'
     >
       {SCREENS.map((item,i)=>
-      // item.loginRequire ?
-      // <Stack.Screen key={i} name={item.name} component={
-      //   item.component
-      // }/>
-      // :
+      item.loginRequire ?
+      <Stack.Screen key={i} name={item.name} component={
+        item.component
+      }/>
+      :
       <Stack.Screen key={i} name={item.name} component={item.component}/>
 
       )}
